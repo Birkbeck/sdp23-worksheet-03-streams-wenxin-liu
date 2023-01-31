@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,6 +75,21 @@ public class Outline {
         List<String> words = getList();
         System.out.println("4:");
         // YOUR CODE
+        words.stream()
+                .map(word -> word + "!")
+                .forEach(System.out::println);
+
+        System.out.println("\n");
+
+        words.stream()
+                .map(word -> word.replace("i", "eye"))
+                .forEach(System.out::println);
+
+        System.out.println("\n");
+
+        words.stream()
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
     }
 
 
@@ -86,6 +102,33 @@ public class Outline {
         List<String> words = getList();
         System.out.println("5a:");
         // YOUR CODE
+        List<String> firstResult = words.stream()
+                .map(String::toUpperCase)
+                .filter(word -> word.length() < 4)
+//                .filter(word -> word.contains("e"))
+                .toList();
+
+//        System.out.println(firstResult.get(0));
+
+        System.out.println();
+
+        List<String> secondResult = words.stream()
+                .map(String::toUpperCase)
+                .peek(System.out::println)
+                .filter(word -> word.length() < 4)
+                .filter(word -> word.contains("q"))
+                .toList();
+
+        Optional<String> alternativeMethod = words.stream()
+                .map(String::toUpperCase)
+                .peek(System.out::println)
+                .filter(word -> word.length() < 4)
+                .filter(word -> word.contains("Q"))
+                .findFirst();
+
+        alternativeMethod.ifPresent(System.out::println);
+
+//        System.out.println(secondResult.get(0));
     }
 
 
@@ -110,6 +153,12 @@ public class Outline {
         List<String> words = getList();
         System.out.println("7:");
         // YOUR CODE
+
+        String result = words.stream()
+                .map(String::toUpperCase)
+                .reduce("", (partialList, element) -> partialList + element);
+
+        System.out.println(result);
     }
 
 
@@ -135,6 +184,7 @@ public class Outline {
         // YOUR CODE
     }
 
+
     // CONTINUE WITH THE REST OF THE QUESTIONS
 
     public static void main(String... args) { // varargs alternative to String[]
@@ -147,5 +197,16 @@ public class Outline {
         question3();
         System.out.println();
 
+        question4();
+        System.out.println();
+
+        question5();
+        System.out.println();
+    }
+
+    static void printWords(List<String> words) {
+        words.stream()
+                .map(word -> "  " + word)
+                .forEach(System.out::print);
     }
 }
