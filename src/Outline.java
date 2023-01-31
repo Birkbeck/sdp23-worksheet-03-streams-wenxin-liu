@@ -17,6 +17,9 @@ public class Outline {
     List<String> words = getList();
     System.out.println("1: ");
     // YOUR CODE
+    words.stream()
+            .map(word -> "  " + word)
+            .forEach(System.out::println);
   }
 
   // Repeat this problem but without two spaces in front of each word.
